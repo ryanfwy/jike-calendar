@@ -1,4 +1,4 @@
-# jike_calendar
+# Jike Calendar
 
 It is a Mac calendar app built with Electron. The idea comes from the Jike desk calendar, which is funny and looks pretty.
 
