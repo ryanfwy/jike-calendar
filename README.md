@@ -21,16 +21,14 @@ To be continued.
 
 ## Usage
 
-Press `Space` to toggle the magnifier, it is a trick to look at a larger date 🌚.  
-![Space](./demo/jike_space.gif)
+You can use some shortcuts to use more conveniently.
 
-`Click` a quote to refresh the content, and `Scroll` it if it is overflowed.  
-![Click](./demo/jike_click.gif)
+- Press `Space` to toggle the magnifier, it is a trick to look at a larger date 🌚. 
+- `Click` a quote to refresh the content, and `Scroll` it if it is overflowed.
+- Press `⌘+W` to dismiss the window, and press `⌘+Q` to quit entirely.
+- `Right click` to popup the menu and see more informations.
 
-Press `⌘+W` to dismiss the window, and press `⌘+Q` to quit entirely.
-
-`Right click` to popup the menu and see more informations.  
-![Space](./demo/jike_right_click.gif)
+![Space](./demo/jike_space.gif) ![Click](./demo/jike_click.gif) ![Space](./demo/jike_right_click.gif)
 
 ## Todo
 
