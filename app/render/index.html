@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Jike Calendar</title>
+        <link href="./index.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="container-date">
+                <div class="day"></div>
+                <div class="date"></div>
+            </div>
+            <div class="container-question">
+                <div class="question">今天是周五吗？</div>
+                <div class="triangle"></div>
+                <span class="answer"></span>
+            </div>
+            <div class="container-loading">
+                <div class="loading"></div>
+                <div class="loading"></div>
+                <div class="loading"></div>
+            </div>
+            <div class="container-content">
+                <div class="content"></div>
+                <div class="container-title">
+                    <div class="topic"></div>
+                    <div class="user"></div>
+                </div>
+            </div>
+        </div>
+        <div class="magnifier" style='display: none; opacity: 0.0;'>
+            <canvas class="magnifier-background"></canvas>
+            <canvas class="magnifier-view"></canvas>
+            <div class="magnifier-title">即刻 x <span id="nickname"></span></div>
+        </div>
+    </body>
+
+    <script src="./index.js"></script>
+    <script src="./magnifier.js"></script>
+    <script src="./request.js"></script>
+</html>

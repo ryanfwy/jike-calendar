@@ -1,0 +1,21 @@
+{
+    "name": "jike-calendar",
+    "version": "0.1.0",
+    "description": "A menubar calendar on Mac with Electron.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/ryanfwy/jike-calendar",
+    "keywords": [
+        "electron",
+        "jike",
+        "calendar"
+    ],
+    "author": "Ryan",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^4.0.1",
+        "electron-builder": "latest"
+    }
+}
