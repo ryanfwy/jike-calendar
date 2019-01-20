@@ -17,7 +17,13 @@ If you don't have the real Jike desk calendar but love it and want one, you shou
 
 ## Install
 
-To be continued.
+Due to the code signature issue, you may be told that the application is unsafe or damaged. To solve it, you should goto `System Preferences - Security & Privacy` and change `Allow apps downloaded from` to `Anywhere`.
+
+For **Sierra** or later, you should use **Terminal** to disable it with the command:
+
+```
+sudo spctl --master-disable
+```
 
 ## Usage
 
