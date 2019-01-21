@@ -43,6 +43,6 @@ You can use some shortcuts to use more conveniently.
 - [ ] Design a popup view to show the entire content of a quote.
 - [ ] Solve the problem of low resolution on magnifier.
 - [ ] Add preferences.
-- [ ] Add check for updates.
+- [x] Add check for updates.
 - [ ] Add share button.
 - [ ] Add lunar calendar and holidays.
