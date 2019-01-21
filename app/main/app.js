@@ -1,6 +1,7 @@
 const electron = require('electron');
 const path = require('path');
 const config = require('./config');
+const update = require('./update');
 const { app, BrowserWindow, Tray, Menu, shell } = electron;
 const { registerShortcut, unregisterShortcut, toggleMagnifier } = require('./magnifier');
 const { getSource } = require('./request');
@@ -67,7 +68,7 @@ function createMenu() {
         },
         {
             label: l10n('CHECK_FOR_UPDATES'),
-            enabled: false
+            click() { update.check(true); }
         },
         {
             type: 'separator'
@@ -152,6 +153,10 @@ function createWindow() {
         renderContents(mainWindow.webContents);
         getSource(mainWindow.webContents);
         toggleWindow();
+
+        setTimeout(() => {
+            update.check();
+        }, 10000); // 10 seconds later
     });
     mainWindow.on('blur', () => {
         if (!DEBUG) toggleWindow(false);

@@ -9,5 +9,19 @@
     "VERSION": "版本号",
     "ABOUT": "关于",
     "HOMEPAGE": "主页",
-    "GUIDANCE": "指导"
+    "GUIDANCE": "指导",
+
+    "BUTTON_OK": "好的",
+    "BUTTON_LATER": "稍后",
+    "BUTTON_UPDATE": "更新",
+    "BUTTON_GOTO": "前往",
+    "TITLE_UPDATE": "更新",
+    "TITLE_NEW_VERSION": "新版本",
+    "TITLE_UP_TO_DATE": "已最新",
+    "MESSAGE_NEW_VERSION_PREPARED": "新版本已准备完毕",
+    "MESSAGE_FOUND_NEW_VERSION_": "发现新版本",
+    "MESSAGE_UP_TO_DATE": "已经是最新版本",
+    "NEW_VERSION_PREPARED_DETAIL": "点击进行更新并重启应用。",
+    "DETAIL_UP_TO_DATE": "请慢慢享用 🤓",
+    "DETAIL_FULL_UPDATE_REQUIRED": "提示：此版本需要完成全量更新，请查看最新发布版本。"
 }

@@ -1,7 +1,15 @@
 {
     "name": "jike-calendar",
     "latest": "0.1.0",
+    "full_update": "0.0.0",
     "manifest": [
+        {
+            "version": "0.2.0",
+            "change_log": {
+                "en": "Feature: add check for update.",
+                "zh": "Feature: 增加检测更新功能。"
+            }
+        },
         {
             "version": "0.1.0",
             "change_log": {

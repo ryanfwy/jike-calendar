@@ -1,10 +1,12 @@
 {
     "name": "jike-calendar",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "A menubar calendar on Mac with Electron.",
     "main": "main.js",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
     },
     "repository": "https://github.com/ryanfwy/jike-calendar",
     "keywords": [
@@ -18,7 +20,42 @@
         "electron": "^4.0.1",
         "electron-builder": "latest"
     },
-    "build": {
+    "resource": {
         "url": "https://raw.githubusercontent.com/ryanfwy/jike-calendar/master/update.json"
+    },
+    "build": {
+        "productName": "Jike Calendar",
+        "appId": "com.jike-calendar.app",
+        "directories": {
+            "output": "../build/v"
+        },
+        "asarUnpack": [
+            "./config"
+        ],
+        "mac": {
+            "icon": "../build/icons/icon.icns",
+            "category": "public.app-category.utilities",
+            "darkModeSupport": true,
+            "target": [
+                "dmg",
+                "zip"
+            ]
+        },
+        "dmg": {
+            "contents": [
+                {
+                    "x": 410,
+                    "y": 200,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 130,
+                    "y": 200,
+                    "type": "file"
+                }
+            ]
+        },
+        "electronVersion": "4.0.1"
     }
 }

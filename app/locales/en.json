@@ -9,5 +9,19 @@
     "VERSION": "Version",
     "ABOUT": "About",
     "HOMEPAGE": "Homepage",
-    "GUIDANCE": "Guidance"
+    "GUIDANCE": "Guidance",
+
+    "BUTTON_OK": "OK",
+    "BUTTON_LATER": "Later",
+    "BUTTON_UPDATE": "Update",
+    "BUTTON_GOTO": "Goto",
+    "TITLE_UPDATE": "Update",
+    "TITLE_NEW_VERSION": "New Version",
+    "TITLE_UP_TO_DATE": "Up To Date",
+    "MESSAGE_NEW_VERSION_PREPARED": "New version is prepared",
+    "MESSAGE_FOUND_NEW_VERSION_": "Found new version",
+    "MESSAGE_UP_TO_DATE": "It is up to date",
+    "DETAIL_NEW_VERSION_PREPARED": "Update and relaunch it right now.",
+    "DETAIL_UP_TO_DATE": "Enjoy yourself 🤓",
+    "DETAIL_FULL_UPDATE_REQUIRED": "Notice: this version requires full update, please check the latest release."
 }
