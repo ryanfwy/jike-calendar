@@ -1,7 +1,7 @@
 {
     "name": "jike-calendar",
-    "latest": "0.1.0",
-    "full_update": "0.0.0",
+    "latest": "0.2.0",
+    "full_update": "0.2.0",
     "manifest": [
         {
             "version": "0.2.0",
