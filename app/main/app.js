@@ -29,8 +29,6 @@ app.on('ready', () => {
     createMenu();
     createWindow();
     moveWindow();
-
-    const update = require('./update');
 });
 app.on('will-quit', () => {
     unregisterShortcut();
