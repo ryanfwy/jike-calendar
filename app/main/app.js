@@ -1,9 +1,9 @@
 const electron = require('electron');
 const path = require('path');
+const config = require('./config');
 const { app, BrowserWindow, Tray, Menu, shell } = electron;
 const { registerShortcut, unregisterShortcut, toggleMagnifier } = require('./magnifier');
 const { getSource } = require('./request');
-const { nickname } = require('./config')
 
 
 const DEBUG = false;
@@ -29,6 +29,8 @@ app.on('ready', () => {
     createMenu();
     createWindow();
     moveWindow();
+
+    const update = require('./update');
 });
 app.on('will-quit', () => {
     unregisterShortcut();
@@ -41,6 +43,10 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+if (config.get('hidedock')) {
+    app.dock.hide();
+}
 
 
 function createMenu() {
@@ -58,7 +64,7 @@ function createMenu() {
         {
             label: l10n('HIDE_DOCK_ICON'),
             type: 'checkbox',
-            checked: false,
+            checked: config.get('hidedock'),
             click(menu) { toggleDockIcon(menu.checked); }
         },
         {
@@ -150,26 +156,27 @@ function createWindow() {
         toggleWindow();
     });
     mainWindow.on('blur', () => {
-        toggleWindow(false);
+        if (!DEBUG) toggleWindow(false);
     });
 
     if (DEBUG) mainWindow.openDevTools();
 }
 
 function renderContents(window) {
-    window.send('RenderContentsFromMain', { nickname });
+    window.send('RenderContentsFromMain', { nickname: config.get('nickname') });
 }
 
 function checkCacheTime() {
     const currentTime = new Date().getDate();
     if (currentTime !== global.cacheTime) {
-        mainWindow.loadFile(appSetting.entry);
+        mainWindow.webContents.send('RenderAllFromMain');
         global.cacheTime = currentTime;
     }
 }
 
 function toggleDockIcon(displayed) {
     displayed ? app.dock.hide() : app.dock.show();
+    config.set('hidedock', displayed);
 }
 
 function toggleWindow(display=null) {

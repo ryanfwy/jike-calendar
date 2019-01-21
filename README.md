@@ -17,7 +17,7 @@ If you don't have the real Jike desk calendar but love it and want one, you shou
 
 ## Install
 
-Check and down the newest version from [Release page](https://github.com/ryanfwy/jike-calendar/releases).
+Check and down the newest version from [Release page](https://github.com/ryanfwy/jike-calendar/releases/latest).
 
 Due to the code signature issue, you may be told that the application is unsafe or damaged. To solve it, you should goto `System Preferences - Security & Privacy` and change `Allow apps downloaded from` to `Anywhere`.
 

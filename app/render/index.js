@@ -12,6 +12,9 @@ ipcIndex.on('RenderContentsFromMain', (event, arg) => {
     const { nickname } = arg;
     document.querySelector('#nickname').innerText = nickname;
 });
+ipcIndex.on('RenderAllFromMain', (event, arg) => {
+    render();
+});
 
 
 /* Events */
@@ -23,7 +26,9 @@ document.addEventListener('contextmenu', evnet => {
 });
 
 
-(() => {
+render();
+
+function render() {
     // Render day and date
     const now = new Date();
     const dayString = WEEK[now.getDay()];
@@ -41,8 +46,7 @@ document.addEventListener('contextmenu', evnet => {
         dayString === 'Friday' ? rgbaString(WHITE, 0.7) : rgbaString(YELLOW, 0.7);
     document.querySelector('.answer').innerText =
         dayString === 'Friday' ? '是' : '不是';
-})();
-
+}
 
 function rgbaString([r, g, b], a) {
     return `rgba(${r}, ${g}, ${b}, ${a})`;

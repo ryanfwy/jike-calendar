@@ -17,5 +17,8 @@
     "devDependencies": {
         "electron": "^4.0.1",
         "electron-builder": "latest"
+    },
+    "build": {
+        "url": "https://raw.githubusercontent.com/ryanfwy/jike-calendar/master/update.json"
     }
 }

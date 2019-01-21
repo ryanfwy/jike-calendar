@@ -1,5 +1,6 @@
 const { ipcMain, net } = require('electron');
-const { topics } = require('./config');
+const topics = require('./config').get('topics');
+const topicsId = topics.map(x => { return x.id; })
 
 
 /* Receiver */
@@ -15,13 +16,13 @@ function getSource(window) {
 
     bufferArray = [];
 
-    let topicIndex = Math.floor(Math.random()*topics.length);
+    let topicIndex = Math.floor(Math.random()*topicsId.length);
     let request = net.request({
         method: 'POST',
         url: "https://app.jike.ruguoapp.com/1.0/squarePosts/list"
     });
     request.setHeader('Content-Type', 'application/json');
-    request.write(`{"topicId": "${topics[topicIndex]}", "limit": 20}`);
+    request.write(`{"topicId": "${topicsId[topicIndex]}", "limit": 20}`);
 
     request.on('response', (response) => {
         response.on('data', (trunk) => {

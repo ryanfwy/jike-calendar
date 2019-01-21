@@ -1,0 +1,13 @@
+{
+    "name": "jike-calendar",
+    "latest": "0.1.0",
+    "manifest": [
+        {
+            "version": "0.1.0",
+            "change_log": {
+                "en": "Initial release",
+                "zh": "首次发布"
+            }
+        }
+    ]
+}

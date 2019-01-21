@@ -1,33 +1,37 @@
 const { app } = require('electron');
-const { language } = require('./config');
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+const language = require('./config').get('language');
 
+
+const localePath = path.join(__dirname, '../locales/');
 
 class Localization {
-    constructor() {
-        this.__localeJSON = this.constructor.loadLocale();
+    constructor(path) {
+        if (!Localization.instance) {
+            this._localePath = path;
+            this._localeJSON = this._loadLocale();
+            Localization.instance = this;
+        }
+        return Localization.instance;
     }
 
-    static loadLocale() {
+    _loadLocale() {
         const locale = (language === 'system' ? app.getLocale() : language).replace(/-.+$/, '');
-        const localePath = path.join(__dirname, '../locales/');
-        if(fs.existsSync(localePath + locale + '.json')) {
-            return JSON.parse(fs.readFileSync(localePath + locale + '.json', 'utf8'));
+        if(fs.existsSync(this._localePath + locale + '.json')) {
+            return JSON.parse(fs.readFileSync(this._localePath + locale + '.json', 'utf8'));
         } else {
-            return JSON.parse(fs.readFileSync(localePath + 'en.json', 'utf8'));
+            return JSON.parse(fs.readFileSync(this._localePath + 'en.json', 'utf8'));
         }
     }
 
     get(key) {
-        return this.__localeJSON[key] ? this.__localeJSON[key] : key;
+        return this._localeJSON[key] ? this._localeJSON[key] : key;
     }
 }
 
-const L = new Localization();
+const L = new Localization(localePath);
 
 module.exports = {
-    l10n(key) {
-        return L.get(key);
-    }
+    l10n(key) { return L.get(key); }
 };

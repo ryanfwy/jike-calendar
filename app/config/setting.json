@@ -1,6 +1,7 @@
 {
     "nickname": "RYAN",
     "language": "system",
+    "hidedock": false,
     "topics": [
         {
             "title": "浴室沉思",
