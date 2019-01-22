@@ -51,68 +51,62 @@ if (config.get('hidedock')) {
 function createMenu() {
     const { l10n } = require('./localization');
 
-    const template = [
-        {
-            id: 'toggle_magnifier',
-            label: l10n('SHOW_MAGNIFIER'),
-            type: 'checkbox',
-            checked: false,
-            accelerator: 'Space',
-            click(menu) { toggleMagnifier(mainWindow, !menu.checked); }
+    const template = [{
+        id: 'toggle_magnifier',
+        label: l10n('SHOW_MAGNIFIER'),
+        type: 'checkbox',
+        checked: false,
+        accelerator: 'Space',
+        click(menu) { toggleMagnifier(mainWindow, !menu.checked); }
+    },
+    {
+        label: l10n('HIDE_DOCK_ICON'),
+        type: 'checkbox',
+        checked: config.get('hidedock'),
+        click(menu) { toggleDockIcon(menu.checked); }
+    },
+    {
+        label: l10n('CHECK_FOR_UPDATES'),
+        click() { update.check(true); }
+    },
+    {
+        type: 'separator'
+    },
+    {
+        label: l10n('WINDOW'),
+        submenu: [{
+            label: l10n('CLOSE'),
+            accelerator: 'Command+W',
+            click() { toggleWindow(false); }
         },
         {
-            label: l10n('HIDE_DOCK_ICON'),
-            type: 'checkbox',
-            checked: config.get('hidedock'),
-            click(menu) { toggleDockIcon(menu.checked); }
-        },
-        {
-            label: l10n('CHECK_FOR_UPDATES'),
-            click() { update.check(true); }
+            label: l10n('QUIT'),
+            accelerator: 'Command+Q',
+            click () { app.quit(); }
+        }]
+    },
+    {
+        label: l10n('HELP'),
+        submenu: [{
+            label: l10n('VERSION') + ' ' + app.getVersion(),
+            enabled: false
         },
         {
             type: 'separator'
         },
         {
-            label: l10n('WINDOW'),
-            submenu: [
-                {
-                    label: l10n('CLOSE'),
-                    accelerator: 'Command+W',
-                    click() { toggleWindow(false); }
-                },
-                {
-                    label: l10n('QUIT'),
-                    accelerator: 'Command+Q',
-                    click () { app.quit(); }
-                }
-            ]
+            label: l10n('ABOUT'),
+            role: 'about'
         },
         {
-            label: l10n('HELP'),
-            submenu: [
-                {
-                    label: l10n('VERSION') + ' ' + app.getVersion(),
-                    enabled: false
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: l10n('ABOUT'),
-                    role: 'about'
-                },
-                {
-                    label: l10n('HOMEPAGE'),
-                    click() { shell.openExternal('https://www.ryannn.com'); }
-                },
-                {
-                    label: l10n('GUIDANCE'),
-                    click() { shell.openExternal('https://github.com/ryanfwy/jike-calendar'); }
-                }
-            ]
-        }
-    ];
+            label: l10n('HOMEPAGE'),
+            click() { shell.openExternal('https://www.ryannn.com'); }
+        },
+        {
+            label: l10n('GUIDANCE'),
+            click() { shell.openExternal('https://github.com/ryanfwy/jike-calendar'); }
+        }]
+    }];
 
     const menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);

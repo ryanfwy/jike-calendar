@@ -11,7 +11,7 @@ global.mouseEvent = null;
 
 /* Events */
 document.addEventListener('mousemove', event => {
-    // if (magnifier.style.display === 'none') return;
+    if (!global.imageObject) return;
     throttle(renderMagnifier, null, event, 10, 100);
 });
 document.addEventListener('DOMContentLoaded', () => {

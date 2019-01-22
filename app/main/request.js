@@ -1,6 +1,6 @@
 const { ipcMain, net } = require('electron');
 const topics = require('./config').get('topics');
-const topicsId = topics.map(x => { return x.id; })
+const topicsId = topics.map(x => { return x.id; });
 
 
 /* Receiver */

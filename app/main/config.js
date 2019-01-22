@@ -2,8 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 
-const configPath = path.join(__dirname, '..', 'config/setting.json');
-
 class Configation {
     constructor(path) {
         if (!Configation.instance) {
@@ -34,6 +32,8 @@ class Configation {
     }
 }
 
+
+const configPath = path.join(__dirname, '..', 'config/setting.json');
 const C = new Configation(configPath);
 
 module.exports = {

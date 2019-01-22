@@ -3,6 +3,7 @@ const { ipcRenderer: ipcRequest } = require('electron');
 
 const containerView = document.querySelector('.container-content');
 const contentView = document.querySelector('.content');
+const containerTitleView = document.querySelector('.container-title');
 const topicView = document.querySelector('.topic');
 const userView = document.querySelector('.user');
 
@@ -42,10 +43,19 @@ function renderRequest(result) {
         ipcRequest.send('GetSourceFromRenderer');
         return;
     }
-    
-    contentView.innerText = content;
-    topicView.innerText = '『' + topic + '』';
-    userView.innerText = 'via ' + user;
+
+    contentView.id = 'fade-out';
+    containerTitleView.id = 'fade-out';
+    setTimeout(() => {
+        contentView.innerText = content;
+        contentView.id = 'fade-in';
+        
+        setTimeout(() => {
+            topicView.innerText = '『' + topic + '』';
+            userView.innerText = 'via ' + user;
+            containerTitleView.id = 'fade-in';
+        }, 200);
+    }, 200);
 
     ipcRequest.send('CaptureFrameFromRenderer');
 }
@@ -55,8 +65,7 @@ function startLoading(idx=0, up=true) {
     
     if (global.loadingOn === false) {
         for (let i=0; i<3; i++) {
-            let view = views[i];
-            simpleAnimate(view, false);
+            simpleAnimate(views[i], false);
         }
     } else if (global.loadingOn === true) {
         simpleAnimate(views[idx], up, () => {

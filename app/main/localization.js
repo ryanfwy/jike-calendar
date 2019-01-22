@@ -4,8 +4,6 @@ const path = require('path');
 const language = require('./config').get('language');
 
 
-const localePath = path.join(__dirname, '../locales/');
-
 class Localization {
     constructor(path) {
         if (!Localization.instance) {
@@ -30,6 +28,8 @@ class Localization {
     }
 }
 
+
+const localePath = path.join(__dirname, '../locales/');
 const L = new Localization(localePath);
 
 module.exports = {

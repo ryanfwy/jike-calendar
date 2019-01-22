@@ -6,8 +6,6 @@ const { net, dialog, BrowserWindow, app, shell } = require('electron');
 const { l10n } = require('./localization');
 
 
-const packagePath = path.join(__dirname, '..', 'package.json');
-
 class Update {
     constructor(path) {
         if (!Update.instance) {
@@ -54,8 +52,8 @@ class Update {
                 method: 'GET',
                 url: url
             });
-            request.on('response', response => {
-                if (response.statusCode !== 200) return;
+            request.on('response', (response) => {
+                if (response.statusCode !== 200) { resolve(null); };
 
                 if (showProgress) {
                     this.__totalBytes = parseInt(response.headers['content-length'], 10);
@@ -86,6 +84,7 @@ class Update {
     async _fetchSourceAndUpdate(tag) {
         const asarUrl = `https://github.com/ryanfwy/jike-calendar/releases/download/v${tag}/app.asar`;
         const data = await this._getHttpsData(asarUrl, true);
+        if (!data) return;
 
         const options = {
             type: 'info',
@@ -162,6 +161,8 @@ class Update {
     }
 }
 
+
+const packagePath = path.join(__dirname, '..', 'package.json');
 const U = new Update(packagePath);
 
 module.exports = {
