@@ -1,8 +1,15 @@
 {
     "name": "jike-calendar",
-    "latest": "0.2.0",
+    "latest": "0.2.1",
     "full_update": "0.2.0",
     "manifest": [
+        {
+            "version": "0.2.1",
+            "change_log": {
+                "en": "Style: improve view transition and animation.",
+                "zh": "Style: 改进视图渐近动画效果。"
+            }
+        },
         {
             "version": "0.2.0",
             "change_log": {
