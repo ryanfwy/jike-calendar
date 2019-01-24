@@ -28,15 +28,15 @@ function unregisterShortcut() {
 }
 
 function captureFrame(window) {
-    return new Promise(resolve => {
-        window.capturePage(image => {
-            const buffer = image.toPNG();
-            const base64 = Buffer.from(buffer).toString('base64');
-            // Answer
-            window.send('CaptureFrameFromMain', base64);
-            resolve(true);
-        });
-    });
+    window.send('CaptureFrameFromMain');
+    // return new Promise(resolve => {
+    //     window.capturePage(image => {
+    //         const base64 = image.toDataURL();
+    //         // Answer
+    //         window.send('CaptureFrameFromMain', base64);
+    //         resolve(true);
+    //     });
+    // });
 }
 
 function toggleMenuItemOfMagnifier() {
