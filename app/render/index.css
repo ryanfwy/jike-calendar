@@ -16,10 +16,16 @@
     animation-fill-mode: forwards;
 }
 
+.transition-bgcolor {
+    transition: background-color 0.8s;
+}
+.transition-bordercolor {
+    transition: border-color 0.8s;
+}
+
 body {
     margin: 0;
     background-color: rgba(255, 255, 255, 0.7);
-    transition: background-color 0.8s;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -59,7 +65,6 @@ body {
     width: 200px;
     height: 30px;
     background: rgba(255, 228, 17, 1);
-    transition: background-color 0.8s;
     font-family: STSongti-SC-Bold;
     font-size: 15px;
     text-align: center;
@@ -68,8 +73,7 @@ body {
 }
 .triangle {
     border: 10px solid transparent;
-    border-top: 10px solid rgba(255, 228, 17, 1);
-    transition: border-color 0.8s;
+    border-top-color: rgba(255, 228, 17, 1);
 }
 .answer {
     font-family: HiraMinProN-W6;

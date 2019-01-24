@@ -24,6 +24,11 @@ document.addEventListener('contextmenu', evnet => {
     const menu = Menu.getApplicationMenu();
     menu.popup();
 });
+window.addEventListener('load', () => {
+    document.querySelector('body').className = 'transition-bgcolor';
+    document.querySelector('.question').className += ' transition-bgcolor';
+    document.querySelector('.triangle').className += ' transition-bordercolor';
+});
 
 
 render();
