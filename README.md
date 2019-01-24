@@ -36,7 +36,7 @@ You can use some shortcuts to use more conveniently.
 - Press `⌘+W` to dismiss the window, and press `⌘+Q` to quit entirely.
 - `Right click` to popup the menu and see more informations.
 
-![Space](./demo/jike_space.gif) ![Click](./demo/jike_click.gif) ![Space](./demo/jike_right_click.gif)
+<img src="./demo/jike_space.gif" alt="Space" height="350"> <img src="./demo/jike_click.gif" alt="Click" height="350"> <img src="./demo/jike_right_click.gif" alt="Right click" height="350">
 
 ## Todo
 
