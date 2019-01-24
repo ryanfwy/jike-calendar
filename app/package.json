@@ -1,6 +1,6 @@
 {
     "name": "jike-calendar",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "A menubar calendar on Mac with Electron.",
     "main": "main.js",
     "scripts": {

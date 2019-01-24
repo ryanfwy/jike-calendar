@@ -1,8 +1,15 @@
 {
     "name": "jike-calendar",
-    "latest": "0.2.1",
+    "latest": "0.3.0",
     "full_update": "0.2.0",
     "manifest": [
+        {
+            "version": "0.3.0",
+            "change_log": {
+                "en": "- Fix: solve the problem of low resolution on magnifier.\n- Style: improve the display effect of color transition.",
+                "zh": "- Fix: 解决放大镜视图清晰度低的问题。\n- Style: 改善颜色过渡显示效果。"
+            }
+        },
         {
             "version": "0.2.1",
             "change_log": {
