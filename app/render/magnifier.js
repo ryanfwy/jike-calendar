@@ -1,6 +1,7 @@
 const { ipcRenderer: ipcMagnifier } = require('electron');
 
 
+const bodyNode = document.querySelector('body');
 const magnifier = document.querySelector('.magnifier');
 const magnifierWidth = 70;
 const magnifierHeight = 100;
@@ -47,9 +48,12 @@ ipcMagnifier.on('ToggleMagnifierFromMain', (event, arg) => {
         });
     }
 });
-ipcMagnifier.on('CaptureFrameFromMain', (event, arg) => {
+ipcMagnifier.on('CaptureFrameFromMain', async (event, arg) => {
     const img = new Image();
-    img.src = 'data:image/png;base64,' + arg;
+    const url = await domtoimage.toSvg(bodyNode, {
+        filter: node => { return node.className !== 'magnifier'; }
+    });
+    img.src = url;
     img.onload = () => {
         global.imageObject = img;
         if (global.mouseEvent) renderMagnifier(global.mouseEvent);
@@ -71,13 +75,10 @@ function renderMagnifier(event) {
     const ctx = canvas.getContext('2d');
     
     const img = global.imageObject;
-    const {width: imgWidth} = img;
-    const {clientWidth: bodyWidth} = document.querySelector('body');
-    const ratio = imgWidth / bodyWidth;
 
     const {width, height} = canvas;
     ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(img, (clientX-magnifierWidth*0.5)*ratio+20, (clientY-magnifierHeight*0.5)*ratio-60, 80, 80, 0, 0, width, height);
+    ctx.drawImage(img, (clientX-magnifierWidth*0.5)+20, (clientY-magnifierHeight*0.5)-25, 30, 30, 0, 0, width, height);
 }
 
 function throttle(fn, context, args, delay, mustApplyTime) {
@@ -120,14 +121,14 @@ function setOpacity(obj) {
 function defaultContext(id, drawRect=false) {
     const canvas = document.querySelector(id);
     const ctx = canvas.getContext('2d');
-    canvas.width = 1000;
-    canvas.height = 1000;
+    canvas.width = 500;
+    canvas.height = 500;
     
     const ratio = canvas.width / 100;
     const rad = -15 * (Math.PI / 180);
 
     const [width, height] = [55*ratio, 75*ratio];
-    const [x0, y0] = [15*10, 22.5*10];
+    const [x0, y0] = [15*ratio, 22.5*ratio];
     const [x1, y1] = [x0+width*Math.cos(rad), y0+width*Math.sin(rad)];
     const [x2, y2] = [x1-height*Math.sin(rad), y1+height*Math.cos(rad)];
     const [x3, y3] = [x0-height*Math.sin(rad), y0+height*Math.cos(rad)];

@@ -15,7 +15,7 @@ Two key points are kept in this version.
 
 If you don't have the real Jike desk calendar but love it and want one, you should take a try.
 
-## Install
+## Installation
 
 Check and down the newest version from [Release page](https://github.com/ryanfwy/jike-calendar/releases/latest).
 
@@ -41,8 +41,12 @@ You can use some shortcuts to use more conveniently.
 ## Todo
 
 - [ ] Design a popup view to show the entire content of a quote.
-- [ ] Solve the problem of low resolution on magnifier.
+- [x] Solve the problem of low resolution on magnifier.
 - [ ] Add preferences.
 - [x] Add check for updates.
 - [ ] Add share button.
 - [ ] Add lunar calendar and holidays.
+
+## Thanks
+
+[DOM to Iamge](https://github.com/tsayen/dom-to-image) by [Anatolii Saienko](https://github.com/tsayen).
