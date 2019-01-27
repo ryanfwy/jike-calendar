@@ -95,7 +95,15 @@ class Update {
             detail: l10n('DETAIL_NEW_VERSION_PREPARED')
         };
         dialog.showMessageBox(null, options, response => {
-            fs_ori.writeFileSync(path.join(__dirname, '../../app.asar'), data);
+            const infoPath = path.join(__dirname, '../../..', 'info.plist');
+            const info = fs.readFileSync(infoPath, 'utf-8')
+                .replace(/(<key>CFBundleShortVersionString<\/key>[\s\S]+?<string>)([0-9.]+)(<\/string>)/, '$1'+tag+'$3')
+                .replace(/(<key>CFBundleVersion<\/key>[\s\S]+?<string>)([0-9.]+)(<\/string>)/, '$1'+tag+'$3');
+            fs.writeFileSync(infoPath, info);
+
+            const asarPath = path.join(__dirname, '../..', 'app.asar');
+            fs_ori.writeFileSync(asarPath, data);
+
             app.relaunch();
             app.quit();
         });
