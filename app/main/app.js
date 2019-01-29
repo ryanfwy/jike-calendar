@@ -63,10 +63,12 @@ function createMenu() {
         label: l10n('HIDE_DOCK_ICON'),
         type: 'checkbox',
         checked: config.get('hidedock'),
+        accelerator: 'Command+H',
         click(menu) { toggleDockIcon(menu.checked); }
     },
     {
         label: l10n('CHECK_FOR_UPDATES'),
+        accelerator: 'Command+U',
         click() { update.check(true); }
     },
     {
@@ -114,6 +116,39 @@ function createMenu() {
 
 function createWindow() {
     // Tray
+    const { l10n } = require('./localization');
+    
+    const template = [{
+        label: l10n('CHECK_FOR_UPDATES'),
+        accelerator: 'Command+U',
+        click() { update.check(true); }
+    },
+    {
+        label: l10n('QUIT'),
+        accelerator: 'Command+Q',
+        click () { app.quit(); }
+    },
+    {
+        type: 'separator'
+    },
+    {
+        label: l10n('VERSION') + ' ' + app.getVersion(),
+        enabled: false
+    },
+    {
+        label: l10n('ABOUT'),
+        role: 'about'
+    },
+    {
+        label: l10n('HOMEPAGE'),
+        click() { shell.openExternal('https://www.ryannn.com'); }
+    },
+    {
+        label: l10n('GUIDANCE'),
+        click() { shell.openExternal('https://github.com/ryanfwy/jike-calendar'); }
+    }];
+    const menu = Menu.buildFromTemplate(template);
+
     mainTray = new Tray(appSetting.icon);
     mainTray.setToolTip(appSetting.name);
 
@@ -123,6 +158,9 @@ function createWindow() {
             getSource(mainWindow.webContents);
         }
         toggleWindow();
+    });
+    mainTray.on('right-click', () => {
+        mainTray.popUpContextMenu(menu);
     });
     
 
