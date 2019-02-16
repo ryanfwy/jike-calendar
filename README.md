@@ -45,7 +45,7 @@ You can use some shortcuts to use more conveniently.
 - [ ] Add preferences.
 - [x] Add check for updates.
 - [ ] Add share button.
-- [ ] Add lunar calendar and holidays.
+- [x] Add lunar calendar.
 
 ## Thanks
 

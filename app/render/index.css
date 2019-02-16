@@ -42,7 +42,6 @@ body {
 
 .container-date {
     padding-top: 10px;
-    display: flex;
 }
 .day {
     font-family: HiraMinProN-W6;
@@ -50,9 +49,9 @@ body {
 }
 .date {
     font-family: HiraMinProN-W3;
-    font-size: 5px;
-    align-self: flex-end;
-    padding: 0 0 5px 2px;
+    font-size: 6px;
+    padding-left: 2px;
+    margin-top: -5px;
 }
 
 .container-question {
