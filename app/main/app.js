@@ -17,7 +17,7 @@ const appSetting = {
     name: 'Jike Calendar',
     width: 350,
     height: 520,
-    icon: path.join(__dirname, '..', 'assets/icon.png'),
+    icon: path.join(__dirname, '..', 'assets/icon_Template.png'),
     entry: path.join(__dirname, '..', 'render/index.html')
 };
 
