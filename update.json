@@ -1,8 +1,15 @@
 {
     "name": "jike-calendar",
-    "latest": "0.3.0",
+    "latest": "0.4.0",
     "full_update": "0.2.0",
     "manifest": [
+        {
+            "version": "0.4.0",
+            "change_log": {
+                "en": "- Feature: add lunar calendar.\n- Update: improve some menu shortcuts and add right-click menu for tray icon.",
+                "zh": "- Feature: 新增农历日期显示。\n- Update: 改善右键菜单快捷键，增加右击任务栏图标弹出菜单。"
+            }
+        },
         {
             "version": "0.3.0",
             "change_log": {
