@@ -1,8 +1,15 @@
 {
     "name": "jike-calendar",
-    "latest": "0.4.0",
+    "latest": "0.4.1",
     "full_update": "0.2.0",
     "manifest": [
+        {
+            "version": "0.4.1",
+            "change_log": {
+                "en": "- Fix: automatically adapt tray icon to light / dark theme.\n- Style: enlarge the view and hide the cursor while showing magnifier.",
+                "zh": "- Fix: 托盘图片自适应系统深浅外观主题。\n- Style: 增大放大镜视图，并在显示时隐藏指针图标。"
+            }
+        },
         {
             "version": "0.4.0",
             "change_log": {
