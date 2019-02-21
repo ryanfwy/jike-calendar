@@ -12,7 +12,7 @@ class Update {
             this._packagePath = path;
             this._packageJSON = this._loadPackage();
             this._version = '';
-            this._url = "";
+            this._url = '';
             this._querying = false;
 
             this._loadUpdateInfo();

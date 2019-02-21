@@ -25,6 +25,7 @@
 
 body {
     margin: 0;
+    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.7);
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -129,7 +130,7 @@ body {
     transform: rotate(-15deg);
     width: 140px;
     height: 200px;
-    border-radius: 8px;
+    border-radius: 5px;
     position: absolute;
     top: -999px;
     left: -999px;
@@ -145,9 +146,9 @@ body {
 }
 .magnifier-title {
     font-family: PingFangSC-Semibold;
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
     position: absolute;
-    bottom: 8px;
+    bottom: 10px;
     width: 100%;
 }
