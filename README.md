@@ -40,7 +40,7 @@ You can use some shortcuts to use more conveniently.
 
 ## Todo
 
-- [ ] Design a popup view to show the entire content of a quote.
+- [x] Design a popup view to show the full content of a quote.
 - [x] Solve the problem of low resolution on magnifier.
 - [ ] Add preferences.
 - [x] Add check for updates.

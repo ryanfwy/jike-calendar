@@ -2,17 +2,42 @@ const { ipcRenderer: ipcRequest } = require('electron');
 
 
 const containerView = document.querySelector('.container-content');
-const contentView = document.querySelector('.content');
-const containerTitleView = document.querySelector('.container-title');
-const topicView = document.querySelector('.topic');
-const userView = document.querySelector('.user');
+const containerContentView = containerView.querySelector('.content');
+const containerTitleView = containerView.querySelector('.title');
+const containerTopicView = containerView.querySelector('.title .topic span');
+const containerUserView = containerView.querySelector('.title .user');
 
-global.loadingOn = false;
+const popupView = document.querySelector('.popup');
+const popupContentPictureView = popupView.querySelector('.content .picture');
+const popupContentTextView = popupView.querySelector('.content .text');
+const popupTopicView = popupView.querySelector('.title .topic span');
+const popupUserView = popupView.querySelector('.title .user');
+const popupAvatarView = popupView.querySelector('.title .avatar');
+
+const leftMaskView = document.querySelector('.container-content .hover .left');
+
+// 0 => waiting, 1 => loading, 2 => done
+global.loadingState = 0;
+global.mouseTimeout = null;
 
 
 /* Events */
-containerView.addEventListener('click', () => {
-    if (global.loadingOn === false) {
+leftMaskView.addEventListener('mouseenter', () => {
+    global.mouseTimeout = setTimeout(() => {
+        if (global.mouseTimeout === -1) return;
+        opacityAnimationLeft(1, 500);
+    }, 800);
+});
+leftMaskView.addEventListener('mouseleave', () => {
+    if (global.mouseTimeout === null) return;
+    clearTimeout(global.mouseTimeout);
+    global.mouseTimeout = null;
+    opacityAnimationLeft(0, 500);
+});
+leftMaskView.addEventListener('click', () => {
+    global.mouseTimeout = -1;
+    opacityAnimationLeft(0, 300);
+    if (global.loadingState === 0) {
         ipcRequest.send('GetSourceFromRenderer');
     }
 });
@@ -20,39 +45,66 @@ containerView.addEventListener('click', () => {
 
 /* Receiver */
 ipcRequest.on('GetSourceFromMain', (event, arg) => {
-    // Loading animation => off
-    global.loadingOn = false;
+    global.loadingState = 2; // Loading stage => done
     let data = JSON.parse(arg);
     renderRequest(data.data);
 });
 ipcRequest.on('StartLoadingFromMain', (event, arg) => {
-    // Loading animation => on
-    global.loadingOn = true;
-    startLoading();
+    // Loading state => loading
+    global.loadingState = 1;
+    let animation = anime({
+        targets: '.container-loading .loading',
+        translateY: [
+            { value: -10, easing: 'easeOutSine', duration: 500 },
+            { value: 0, easing: 'easeOutSine', duration: 500 }
+        ],
+        delay(el, i) { return i * 200; },
+        endDelay(el, i, l) { return (l - i) * 100; },
+        complete() {
+            if (global.loadingState === 1) animation.restart();
+            else if (global.loadingState === 2) global.loadingState = 0;
+        }
+    })
 });
 
 
 function renderRequest(result) {
-    let contentIndex = Math.floor(Math.random()*result.length)
-    let topic = result[contentIndex].topic.content
-    let user = result[contentIndex].user.screenName
-    let content = result[contentIndex].content
-    let picture = result[contentIndex].pictures.length > 0 ? result[contentIndex].pictures[0].smallPicUrl : ""
+    let contentIndex = Math.floor(Math.random()*result.length);
+    let topic = result[contentIndex].topic.content;
+    let user = result[contentIndex].user.screenName;
+    let content = result[contentIndex].content;
+    let pictures = result[contentIndex].pictures;
+    let avatar = result[contentIndex].user.avatarImage.smallPicUrl;
     
     if (content === '') {
         ipcRequest.send('GetSourceFromRenderer');
         return;
     }
 
-    contentView.id = 'fade-out';
+    // Popup view contents
+    popupContentPictureView.innerHTML = '';
+    for (let pic of pictures) {
+        let img = document.createElement('img');
+        img.src = pic.smallPicUrl;
+        img.onclick = (sender) => { console.log(sender.target.src); };
+        popupContentPictureView.appendChild(img);
+    }
+    popupContentTextView.innerText = content;
+    popupTopicView.innerText = topic;
+    popupUserView.innerText = 'via ' + user;
+    popupAvatarView.src = avatar;
+
+
+    containerContentView.id = 'fade-out';
     containerTitleView.id = 'fade-out';
     setTimeout(() => {
-        contentView.innerText = content;
-        contentView.id = 'fade-in';
+        if (pictures.length > 0) content = `(❐^${pictures.length}) ${content}`;
+        containerContentView.innerText = content;
+        containerContentView.id = 'fade-in';
         
         setTimeout(() => {
-            topicView.innerText = '『' + topic + '』';
-            userView.innerText = 'via ' + user;
+            containerTopicView.innerText = topic;
+            containerUserView.innerText = 'via ' + user;
             containerTitleView.id = 'fade-in';
         }, 200);
     }, 200);
@@ -60,30 +112,11 @@ function renderRequest(result) {
     ipcRequest.send('CaptureFrameFromRenderer');
 }
 
-function startLoading(idx=0, up=true) {
-    let views = document.querySelectorAll('.loading');
-    
-    if (global.loadingOn === false) {
-        for (let i=0; i<3; i++) {
-            simpleAnimate(views[i], false);
-        }
-    } else if (global.loadingOn === true) {
-        simpleAnimate(views[idx], up, () => {
-            if (global.loadingOn === false) startLoading();
-            else startLoading(up ? idx : (idx+1)%3, !up);
-        });
-    }
-}
-
-function simpleAnimate(view, up, completion=null) {
-    let timer = setInterval(() => {
-        let offset = Number(view.style.top.replace('px', ''));
-        let value = up ? offset - 0.5 : offset + 0.5;
-        view.style.top = value + 'px';
-        if (value < -10 || value > 0.5) {
-            view.style.top = (up ? -10 : 0) + 'px';
-            clearInterval(timer);
-            if (completion) completion();
-        }
-    }, 10);
+function opacityAnimationLeft(opacity, duration) {
+    anime({
+        targets: leftMaskView,
+        opacity: opacity,
+        duration: duration,
+        easing: 'linear'
+    });
 }

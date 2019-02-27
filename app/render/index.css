@@ -44,11 +44,11 @@ body {
 .container-date {
     padding-top: 10px;
 }
-.day {
+.container-date .day {
     font-family: HiraMinProN-W6;
     font-size: 25px;
 }
-.date {
+.container-date .date {
     font-family: HiraMinProN-W3;
     font-size: 6px;
     padding-left: 2px;
@@ -61,7 +61,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.question {
+.container-question .question {
     width: 200px;
     height: 30px;
     background: rgba(255, 228, 17, 1);
@@ -71,11 +71,11 @@ body {
     border-radius: 15px;
     line-height: 30px;
 }
-.triangle {
+.container-question .triangle {
     border: 10px solid transparent;
     border-top-color: rgba(255, 228, 17, 1);
 }
-.answer {
+.container-question .answer {
     font-family: HiraMinProN-W6;
     font-size: 130px;
     margin-top: -30px;
@@ -86,7 +86,7 @@ body {
     justify-content: center;
     margin-top: -15px;
 }
-.loading {
+.container-loading .loading {
     position: relative;
     width: 5px;
     height: 5px;
@@ -96,35 +96,87 @@ body {
 }
 
 .container-content {
+    position: relative;
     width: 90%;
     padding-top: 20px;
     margin: 0 auto;
-    cursor: pointer;
 }
-.content {
+.container-content .content {
+    display: -webkit-box;
     height: 120px;
     font-family: STSongti-SC-Light;
     text-align: justify;
-    font-size: 12px;
-    overflow-y: auto;
+    font-size: 14px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
 }
 
-.container-title {
+.container-content .title {
     padding-top: 10px;
 }
-.topic {
+.container-content .title .topic {
     font-family: STSongti-SC-Bold;
     font-size: 12px;
     float: left;
 }
-.user {
+.container-content .title .topic img {
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+}
+.container-content .title .topic span {
+    margin-left: 5px;
+}
+.container-content .title .user {
     font-family: STSongti-SC-Light;
     font-size: 12px;
     text-align: right;
     float: right;
 }
+.container-content .hover {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.container-content .hover .left {
+    -webkit-mask: url('./assets/refresh.svg') no-repeat center;
+    opacity: 0.0;
+    background: linear-gradient(to right, rgba(255, 228, 17, 0.8), rgba(255, 228, 17, 0.0));
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 15px;
+    left: -5px;
+    bottom: 5px;
+    width: 45%;
+    cursor: pointer;
+}
+.container-content .hover .right {
+    -webkit-mask: url('./assets/open.svg') no-repeat center;
+    opacity: 0.0;
+    background: linear-gradient(to left, rgba(255, 228, 17, 0.8), rgba(255, 228, 17, 0.0));
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 15px;
+    right: -5px;
+    bottom: 5px;
+    width: 45%;
+    cursor: pointer;
+}
+.container-content .hover .icon {
+    flex: 1;
+}
 
 .magnifier {
+    z-index: 200;
     background-color: rgba(255, 228, 17, 1);
     box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
     transform: rotate(-15deg);
@@ -135,7 +187,7 @@ body {
     top: -999px;
     left: -999px;
 }
-.magnifier-view, .magnifier-background {
+.magnifier .view, .magnifier .background {
     width: 200px;
     height: 200px;
     /* border-radius: 5px; */
@@ -144,11 +196,115 @@ body {
     left: -16px;
     top: -8px;
 }
-.magnifier-title {
+.magnifier .title {
     font-family: PingFangSC-Semibold;
     font-size: 10px;
     text-align: center;
     position: absolute;
     bottom: 10px;
     width: 100%;
+}
+
+.popup {
+    display: none;
+    opacity: 0.0;
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+.popup .content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgba(255, 228, 17, 1);
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    width: 80%;
+    border-radius: 5px;
+    top: 30px;
+    bottom: 100px;
+    left: 10%;
+}
+.popup .content .picture {
+    display: flex;
+    overflow-x: auto;
+    border-radius: 4px 4px 0 0;
+}
+.popup .content .picture img {
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    flex-shrink: 0;
+    flex: 1;
+}
+.popup .content .picture img:not(:last-child) {
+    margin-right: 5px;
+}
+.popup .content .text {
+    flex: 1;
+    padding: 10px;
+    font-family: STSongti-SC-Light;
+    text-align: justify;
+    font-size: 14px;
+    overflow-y: auto;
+}
+
+.popup .triangle {
+    position: absolute;
+    right: 10%;
+    bottom: 80px;
+}
+.popup .triangle .background {
+    position: absolute;
+    right: 15px;
+    bottom: 1px;
+    border: 10px solid transparent;
+    border-top-color: #ccc;
+}
+.popup .triangle .view {
+    position: absolute;
+    right: 15px;
+    bottom: 2px;
+    border: 10px solid transparent;
+    border-top-color: rgba(255, 228, 17, 1);
+}
+
+.popup .title {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 60px;
+    width: 80%;
+    border-radius: 5px;
+    bottom: 20px;
+    left: 10%;
+}
+.popup .title .topic {
+    flex: 1;
+    font-family: STSongti-SC-Bold;
+    font-size: 18px;
+}
+.popup .title .topic img {
+    width: 20px;
+    height: 20px;
+    vertical-align: sub;
+}
+.popup .title .topic span {
+    margin-left: 5px;
+}
+.popup .title .user {
+    flex: 1;
+    font-family: STSongti-SC-Light;
+    font-size: 13px;
+}
+.popup .title .avatar {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
 }

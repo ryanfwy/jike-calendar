@@ -25,14 +25,13 @@ ipcIndex.on('RenderAllFromMain', (event, arg) => {
 /* Events */
 document.addEventListener('contextmenu', evnet => {
     evnet.preventDefault();
-
     const menu = Menu.getApplicationMenu();
     menu.popup();
 });
 window.addEventListener('load', () => {
     document.querySelector('body').className = 'transition-bgcolor';
-    document.querySelector('.question').className += ' transition-bgcolor';
-    document.querySelector('.triangle').className += ' transition-bordercolor';
+    document.querySelector('.container-question .question').className += ' transition-bgcolor';
+    document.querySelector('.container-question .triangle').className += ' transition-bordercolor';
 });
 
 
@@ -45,17 +44,22 @@ function render() {
     const [month, date] = [now.getMonth()+1, now.getDate()];
     const dateString = `${month} 月 ${date} 日&nbsp;&nbsp;&nbsp;&nbsp;${showLunarCal(now)}`;
 
-    document.querySelector('.day').innerText = dayString;
-    document.querySelector('.date').innerHTML = dateString;
+    document.querySelector('.container-date .day').innerText = dayString;
+    document.querySelector('.container-date .date').innerHTML = dateString;
 
     document.querySelector('body').style.backgroundColor = 
         dayString === 'Friday' ? rgbaString(YELLOW, 0.7) : rgbaString(WHITE, 0.7);
-    document.querySelector('.question').style.backgroundColor = 
+    document.querySelector('.container-question .question').style.backgroundColor = 
         dayString === 'Friday' ? rgbaString(WHITE, 0.7) : rgbaString(YELLOW, 0.7);
-    document.querySelector('.triangle').style.borderTopColor = 
+    document.querySelector('.container-question .triangle').style.borderTopColor = 
         dayString === 'Friday' ? rgbaString(WHITE, 0.7) : rgbaString(YELLOW, 0.7);
-    document.querySelector('.answer').innerText =
+    document.querySelector('.container-question .answer').innerText =
         dayString === 'Friday' ? '是' : '不是';
+
+    document.querySelector('.container-content .hover .left').style.background = 
+        dayString === 'Friday' ? 'linear-gradient(to right, rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0.0))' : 'linear-gradient(to right, rgba(255, 228, 17, 1.0), rgba(255, 228, 17, 0.0))';
+    document.querySelector('.container-content .hover .right').style.background = 
+        dayString === 'Friday' ? 'linear-gradient(to left, rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0.0))' : 'linear-gradient(to left, rgba(255, 228, 17, 1.0), rgba(255, 228, 17, 0.0))';
 }
 
 function rgbaString([r, g, b], a) {

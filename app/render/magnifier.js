@@ -16,8 +16,8 @@ document.addEventListener('mousemove', event => {
     throttle(renderMagnifier, null, event, 10, 100);
 });
 document.addEventListener('DOMContentLoaded', () => {
-    defaultContext('.magnifier-background', true);
-    defaultContext('.magnifier-view', false);
+    defaultContext('.magnifier .background', true);
+    defaultContext('.magnifier .view', false);
 });
 
 
@@ -30,21 +30,28 @@ ipcMagnifier.on('ToggleMagnifierFromMain', (event, arg) => {
     const mode = magnifier.style.display === 'none' ? '+' : '-';
 
     if (mode === '+') {
-        magnifier.style.display = 'block';
-        document.querySelector('body').style.cursor = 'none';
-        document.querySelector('.container').style.pointerEvents = 'none';
-        setOpacity({
-            mode: '+',
-            range: [0.0, 1.0],
-            handler: null
+        anime({
+            targets: magnifier,
+            opacity: 1.0,
+            duration: 300,
+            easing: 'linear',
+            begin() {
+                magnifier.style.display = 'block';
+                document.querySelector('body').style.cursor = 'none';
+                document.querySelector('.container').style.pointerEvents = 'none';
+            }
         });
     } else {
-        document.querySelector('body').style.cursor = 'auto';
-        document.querySelector('.container').style.pointerEvents = 'all';
-        setOpacity({
-            mode: '-',
-            range: [0.0, 1.0],
-            handler: () => {
+        anime({
+            targets: magnifier,
+            opacity: 0.0,
+            duration: 300,
+            easing: 'linear',
+            begin() {
+                document.querySelector('body').style.cursor = 'auto';
+                document.querySelector('.container').style.pointerEvents = 'all';
+            },
+            complete() {
                 magnifier.style.display = 'none';
             }
         });
@@ -73,7 +80,7 @@ function renderMagnifier(event) {
     magnifier.style.left = `${clientX-magnifierWidth}px`;
     magnifier.style.top = `${clientY-magnifierHeight}px`;
 
-    const canvas = document.querySelector('.magnifier-view');
+    const canvas = document.querySelector('.magnifier .view');
     const ctx = canvas.getContext('2d');
     
     const img = global.imageObject;
@@ -100,23 +107,6 @@ function throttle(fn, context, args, delay, mustApplyTime) {
         fn.timer = setTimeout(() => {
             fn.call(context, args);
         }, delay);
-    }
-}
-
-function setOpacity(obj) {
-    const {mode, range, handler} = obj;
-    const [min, max] = range;
-
-    let opacity = Number(magnifier.style.opacity);
-    let newOpacity = mode === '+' ? opacity+0.05 : opacity-0.05;
-    magnifier.style.opacity = newOpacity.toString();
-    if (newOpacity < max && newOpacity > min) {
-        setTimeout(() => {
-            setOpacity({mode, range, handler});
-        }, 10);
-    } else {
-        magnifier.style.opacity = (mode === '+' ? max : min).toString();
-        if (obj.handler) obj.handler();
     }
 }
 

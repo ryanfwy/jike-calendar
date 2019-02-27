@@ -24,20 +24,41 @@
             </div>
             <div class="container-content">
                 <div class="content"></div>
-                <div class="container-title">
-                    <div class="topic"></div>
+                <div class="title">
+                    <div class="topic"><img src="./assets/hashtag.svg"><span></span></div>
                     <div class="user"></div>
+                </div>
+                <div class="hover">
+                    <div class="left"></div>
+                    <div class="right"></div>
                 </div>
             </div>
         </div>
         <div class="magnifier" style='display: none; opacity: 0.0;'>
-            <canvas class="magnifier-background"></canvas>
-            <canvas class="magnifier-view"></canvas>
-            <div class="magnifier-title">即刻 x <span id="nickname"></span></div>
+            <canvas class="background"></canvas>
+            <canvas class="view"></canvas>
+            <div class="title">即刻 x <span id="nickname"></span></div>
+        </div>
+        <div class="popup">
+            <div class="content">
+                <div class="picture"></div>
+                <div class="text"></div>
+            </div>
+            <div class="triangle">
+                <div class="background"></div>
+                <div class="view"></div>
+            </div>
+            <div class="title">
+                <div class="topic"><img src="./assets/hashtag.svg"><span></span></div>
+                <div class="user"></div>
+                <img class="avatar" src="https://cdn.ruguoapp.com/FkfHaByGYatEnH9UHpa8IAQwfHgT.jpg?imageView2/0/w/800/h/800"></img>
+            </div>
         </div>
     </body>
 
     <script src="./dom-to-image.min.js"></script>
+    <script src="./anime.min.js"></script>
+    <script src="./popupup.js"></script>
     <script src="./index.js"></script>
     <script src="./magnifier.js"></script>
     <script src="./request.js"></script>

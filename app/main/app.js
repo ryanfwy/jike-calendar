@@ -204,6 +204,8 @@ function renderContents(window) {
 function checkCacheTime() {
     const currentTime = new Date().getDate();
     if (currentTime !== global.cacheTime) {
+        // Check for updates once a day
+        update.check();
         mainWindow.webContents.send('RenderAllFromMain');
         global.cacheTime = currentTime;
     }
