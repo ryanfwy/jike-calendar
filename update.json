@@ -1,8 +1,15 @@
 {
     "name": "jike-calendar",
-    "latest": "0.4.1",
+    "latest": "0.5.0",
     "full_update": "0.2.0",
     "manifest": [
+        {
+            "version": "0.5.0",
+            "change_log": {
+                "en": "- Fix: overflow issue of the window, it should be non-scrollable when the magnifier is on.\n- Feat: check for updates automatically once a day.\n- Feat: design a popup view to show the full content, including the uploaded pictures.",
+                "zh": "- Fix: 修复窗口页面溢出问题，该页面在放大镜开启时应该禁止滚动。\n- Feat: 每天自动进行一次检查更新。\n- Feat: 设计弹出页面以显示完整内容，包括上传图片。"
+            }
+        },
         {
             "version": "0.4.1",
             "change_log": {
