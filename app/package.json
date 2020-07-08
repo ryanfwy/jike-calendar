@@ -17,7 +17,7 @@
     "author": "Ryan",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^4.0.1",
+        "electron": "^9.1.0",
         "electron-builder": "latest"
     },
     "resource": {
